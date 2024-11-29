@@ -5,7 +5,7 @@ FROM php:8.0-fpm
 LABEL maintainer="victorhilinsky@gmail.com"
 
 # Install Nginx and necessary PHP extensions
-RUN apt update && apt install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     nginx \
     net-tools \
     libpng-dev \
