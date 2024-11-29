@@ -6,11 +6,11 @@ LABEL maintainer="victorhilinsky@gmail.com"
 
 # Install Nginx and necessary PHP extensions
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    nginx \
-    net-tools \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
+    nginx=1.27.3 \
+    net-tools=2.10-1.1ubuntu1 \
+    libpng-dev=1.6.44-1 \
+    libjpeg-dev=8c-2ubuntu11 \
+    libfreetype6-dev=2.10.1-2ubuntu0.3 \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd \
     && docker-php-ext-install mysqli \
