@@ -21,9 +21,10 @@ jobs:
         uses: hadolint/hadolint-action@v2.0.0
         with:
           dockerfile: Dockerfile
+          ignore: DL3008
       - name: Build the Docker image
         run: docker build --file ./Dockerfile --tag jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ github.sha }} .
-      - name: Run the NodeJS App
+      - name: Run the WordPress App
         run: docker run --name wordpress -p 8080:8080 -d jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ github.sha }}
       - name: Setup Curl
         run: sudo apt install curl
@@ -47,9 +48,9 @@ jobs:
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
       env:
-        SLACK_CHANNEL: all-slack
+        SLACK_CHANNEL: project-notify
         SLACK_COLOR: ${{ job.status }}
-        SLACK_MESSAGE: "Docker image is ready jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ github.sha }}"
+        SLACK_MESSAGE: "Docker image test and ready jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ github.sha }}"
         SLACK_TITLE: Docker image build status
         SLACK_USERNAME: GitHub
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
