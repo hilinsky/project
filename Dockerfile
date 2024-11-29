@@ -5,7 +5,7 @@ FROM php:8.0-fpm
 LABEL maintainer="victorhilinsky@gmail.com"
 
 # Install Nginx and necessary PHP extensions
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y --no-install-recommends \
     nginx \
     net-tools \
     libpng-dev \
@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd \
     && docker-php-ext-install mysqli \
-    && docker-php-ext-enable mysqli
+    && docker-php-ext-enable mysqli \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory
 WORKDIR /var/www/html
