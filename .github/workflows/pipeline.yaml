@@ -89,11 +89,12 @@ jobs:
         run: |
           sed -i "s/^appVersion:.*$/appVersion: ${{ needs.docker_notification.outputs.version }}/" ./helm-sources/wordpress/Chart.yaml
           sed -i "s/^version:.*$/version: ${{ needs.docker_notification.outputs.version }}/" ./helm-sources/wordpress/Chart.yaml
-          sed -i "s/^ *tag:.*$/  tag: \"${{ needs.docker_notification.outputs.tag }}\"/" values.yaml
+          sed -i "s/^ *tag:.*$/  tag: \"${{ needs.docker_notification.outputs.tag }}\"/" ./helm-sources/wordpress/values.yaml
       - name: Helm Check
-        uses: igabaydulin/helm-check-action@v0.1.5
-        with:
+        uses: igabaydulin/helm-check-action@master
+        env:
           CHART_LOCATION: ./helm-sources/wordpress/
+          CHART_VALUES: ./helm-sources/wordpress/values.yaml
       - name: Lint Helm Charts
         run: |
           helm lint ./helm-sources/wordpress/
