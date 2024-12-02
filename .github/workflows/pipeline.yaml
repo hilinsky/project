@@ -50,9 +50,13 @@ jobs:
           push: true
           tags: jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ steps.tag_version.outputs.new_tag }}
 
-  notification:
+  docker_notification:
+    name: Docker notification
     needs: build_test_push_image
     runs-on: ubuntu-latest
+    outputs:
+        tag: ${{ needs.build_test_push_image.outputs.tag }}
+        version: ${{ needs.build_test_push_image.outputs.version }}
     steps:
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
@@ -66,27 +70,37 @@ jobs:
 
   update_helm_repo:
     name: Update helm repository
-    needs: build_test_push_image
+    needs: docker_notification
     runs-on: ubuntu-latest
+    outputs:
+        tag: ${{ needs.docker_notification.outputs.tag }}
+        version: ${{ needs.docker_notification.outputs.version }}
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
         with:
           repository: hilinsky/helm-project
-          token: ${{ secrets.GIT_TOKEN }} 
+          token: ${{ secrets.GIT_TOKEN }}
       - name: Set up Helm
         uses: azure/setup-helm@v1
         with:
           helm-version: v3.8.0
       - name: Update Chart.yaml and values.yaml
         run: |
-          sed -i 's/version: "[^"]*"/version: "${{ needs.build_test_push_image.outputs.version }}"/'./helm-sources/wordpress/Chart.yaml
-          sed -i 's/appVersion: "[^"]*"/appVersion: "${{ needs.build_test_push_image.outputs.version }}"/' ./helm-sources/wordpress/Chart.yaml
-          sed -i 's/tag: "[^"]*"/tag: "${{ needs.build_test_push_image.outputs.tag }}"/' ./helm-sources/wordpress/values.yaml
+          sed -i "s/^appVersion:.*$/appVersion: ${{ needs.docker_notification.outputs.version }}/" ./helm-sources/wordpress/Chart.yaml
+          sed -i "s/^version:.*$/version: ${{ needs.docker_notification.outputs.version }}/" ./helm-sources/wordpress/Chart.yaml
+          sed -i "s/^ *tag:.*$/  tag: \"${{ needs.docker_notification.outputs.tag }}\"/" values.yaml
+      - name: Helm Check
+        uses: igabaydulin/helm-check-action@v0.2.0
+        with:
+          CHART_LOCATION: ./helm-sources/wordpress
+      - name: Lint Helm Charts
+        run: |
+          helm lint ./helm-sources/wordpress
       - name: Package Helm charts
         run: |
           helm package ./helm-sources/wordpress
-          mv wordpress-${{ needs.build_test_push_image.outputs.version }}.tgz ./helm-releases/
+          mv wordpress-${{ needs.docker_notification.outputs.version }}.tgz ./helm-releases/
       - name: Update Helm repo index
         run: |
           helm repo index . --url https://hilinsky.github.io/helm-project/
@@ -95,5 +109,20 @@ jobs:
           git config --local user.email "victorhilinsky@gmail.com"
           git config --local user.name "Victor Trush"
           git add .
-          git commit -m "Add App ${{ needs.build_test_push_image.outputs.version }}-version" || echo "No changes to commit"
+          git commit -m "Add App ${{ needs.docker_notification.outputs.version }}-version" || echo "No changes to commit"
           git push origin master
+
+  helm_notification:
+    name: Helm notification
+    needs: update_helm_repo
+    runs-on: ubuntu-latest
+    steps:
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_CHANNEL: project-notify
+        SLACK_COLOR: ${{ job.status }}
+        SLACK_MESSAGE: "Helm package test and ready https://github.com/hilinsky/helm-project/blob/master/helm-releases/wordpress-${{ needs.update_helm_repo.outputs.version }}.tgz"
+        SLACK_TITLE: Docker image build status
+        SLACK_USERNAME: GitHub
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
