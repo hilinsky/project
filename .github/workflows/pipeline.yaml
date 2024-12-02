@@ -5,14 +5,12 @@ jobs:
   build_test_push_image:
     name: Build, Test and Push Docker image
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     outputs:
         tag: ${{ steps.tag_version.outputs.new_tag }}
         version: ${{ steps.tag_version.outputs.new_version }}
     permissions:
       packages: write
-      contents: read
+      contents: write
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
