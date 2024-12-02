@@ -80,9 +80,9 @@ jobs:
           helm-version: v3.8.0
       - name: Update Chart.yaml and values.yaml
         run: |
-          sed -i 's/version: "[^"]*"/version: "${{ needs.build_test_push_image.outputs.version }}"/'./helm-sources/wordpress/Chart.yaml
-          sed -i 's/appVersion: "[^"]*"/appVersion: "${{ needs.build_test_push_image.outputs.version }}"/' ./helm-sources/wordpress/Chart.yaml
-          sed -i 's/tag: "[^"]*"/tag: "${{ needs.build_test_push_image.outputs.tag }}"/' ./helm-sources/wordpress/values.yaml
+          sed -i "s/^appVersion:.*$/appVersion: ${{ needs.build_test_push_image.outputs.version }}/" ./helm-sources/wordpress/Chart.yaml
+          sed -i "s/^version:.*$/version: ${{ needs.build_test_push_image.outputs.version }}/" ./helm-sources/wordpress/Chart.yaml
+          sed -i "s/^ *tag:.*$/  tag: \"${{ needs.build_test_push_image.outputs.tag }}\"/" ./helm-sources/wordpress/values.yaml
       - name: Package Helm charts
         run: |
           helm package ./helm-sources/wordpress
