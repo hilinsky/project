@@ -5,12 +5,19 @@ jobs:
   build_test_push_image:
     name: Build, Test and Push Docker image
     runs-on: ubuntu-latest
+    outputs:
+        tag: ${{ steps.tag_version.outputs.new_tag }}
     permissions:
       packages: write
       contents: read
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
@@ -23,9 +30,9 @@ jobs:
           dockerfile: Dockerfile
           ignore: DL3008
       - name: Build the Docker image
-        run: docker build --file ./Dockerfile --tag jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ github.sha }} .
+        run: docker build --file ./Dockerfile --tag jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ steps.tag_version.outputs.new_tag }} .
       - name: Run the WordPress App
-        run: docker run --name wordpress -p 8080:8080 -d jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ github.sha }}
+        run: docker run --name wordpress -p 8080:8080 -d jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ steps.tag_version.outputs.new_tag }}
       - name: Setup Curl
         run: sudo apt install curl
       - name: Test Request
@@ -33,14 +40,15 @@ jobs:
       - name: Non-root check for Docker image
         uses: wetransform/gha-docker-nonroot@v1.0.3
         with:
-          image-ref: jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ github.sha }}
+          image-ref: jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ steps.tag_version.outputs.new_tag }}
           fail-for-root: true
       - name: Build and push image
         uses: docker/build-push-action@v3
         with:
           context: ./
           push: true
-          tags: jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ github.sha }}
+          tags: jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ steps.tag_version.outputs.new_tag }}
+
   notification:
     needs: build_test_push_image
     runs-on: ubuntu-latest
@@ -50,7 +58,40 @@ jobs:
       env:
         SLACK_CHANNEL: project-notify
         SLACK_COLOR: ${{ job.status }}
-        SLACK_MESSAGE: "Docker image test and ready jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ github.sha }}"
+        SLACK_MESSAGE: "Docker image test and ready jfrog.it-academy.by/public/nginx-fpm-wordpress:${{ needs.build_test_push_image.outputs.tag }}"
         SLACK_TITLE: Docker image build status
         SLACK_USERNAME: GitHub
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  update_helm_repo:
+    name: Update helm repository
+    needs: build_test_push_image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          repository: hilinsky/helm-project
+          token: ${{ secrets.GIT_TOKEN }} 
+      - name: Set up Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3.sh | bash
+      - name: Update Chart.yaml and values.yaml
+        run: |
+          sed -i 's/version: "[^"]*"/version: "${{ needs.build_test_push_image.outputs.tag }}"/'./helm-sources/wordpress/Chart.yaml
+          sed -i 's/appVersion: "[^"]*"/appVersion: "${{ needs.build_test_push_image.outputs.tag }}"/' ./helm-sources/wordpress/Chart.yaml
+          sed -i 's/tag: "[^"]*"/tag: "${{ needs.build_test_push_image.outputs.tag }}"/' ./helm-sources/wordpress/values.yaml
+      - name: Package Helm charts
+        run: |
+          helm package ./helm-sources/wordpress
+          mv wordpress-${{ needs.build_test_push_image.outputs.tag }}.tgz ./helm-releases/
+      - name: Update Helm repo index
+        run: |
+          helm repo index . --url https://hilinsky.github.io/helm-project/
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "victorhilinsky@gmail.com"
+          git config --local user.name "Victor Trush"
+          git add .
+          git commit -m "Add App ${{ needs.build_test_push_image.outputs.tag }}-version" || echo "No changes to commit"
+          git push origin master
