@@ -5,8 +5,11 @@ jobs:
   build_test_push_image:
     name: Build, Test and Push Docker image
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     outputs:
         tag: ${{ steps.tag_version.outputs.new_tag }}
+        version: ${{ steps.tag_version.outputs.new_version }}
     permissions:
       packages: write
       contents: read
@@ -78,13 +81,13 @@ jobs:
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3.sh | bash
       - name: Update Chart.yaml and values.yaml
         run: |
-          sed -i 's/version: "[^"]*"/version: "${{ needs.build_test_push_image.outputs.tag }}"/'./helm-sources/wordpress/Chart.yaml
-          sed -i 's/appVersion: "[^"]*"/appVersion: "${{ needs.build_test_push_image.outputs.tag }}"/' ./helm-sources/wordpress/Chart.yaml
+          sed -i 's/version: "[^"]*"/version: "${{ needs.build_test_push_image.outputs.version }}"/'./helm-sources/wordpress/Chart.yaml
+          sed -i 's/appVersion: "[^"]*"/appVersion: "${{ needs.build_test_push_image.outputs.version }}"/' ./helm-sources/wordpress/Chart.yaml
           sed -i 's/tag: "[^"]*"/tag: "${{ needs.build_test_push_image.outputs.tag }}"/' ./helm-sources/wordpress/values.yaml
       - name: Package Helm charts
         run: |
           helm package ./helm-sources/wordpress
-          mv wordpress-${{ needs.build_test_push_image.outputs.tag }}.tgz ./helm-releases/
+          mv wordpress-${{ needs.build_test_push_image.outputs.version }}.tgz ./helm-releases/
       - name: Update Helm repo index
         run: |
           helm repo index . --url https://hilinsky.github.io/helm-project/
@@ -93,5 +96,5 @@ jobs:
           git config --local user.email "victorhilinsky@gmail.com"
           git config --local user.name "Victor Trush"
           git add .
-          git commit -m "Add App ${{ needs.build_test_push_image.outputs.tag }}-version" || echo "No changes to commit"
+          git commit -m "Add App ${{ needs.build_test_push_image.outputs.version }}-version" || echo "No changes to commit"
           git push origin master
