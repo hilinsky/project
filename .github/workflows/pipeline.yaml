@@ -26,7 +26,7 @@ jobs:
             ansible-playbook -i inv.yaml mariadb.yaml -e name_db=${{ secrets.DB_NAME }} -e user_db=${{ secrets.DB_USER }} -e pass_db=${{ secrets.DB_PASS }} -l mariadb -u root
             
   ansible_notification:
-    name: Docker notification
+    name: Ansible notification
     runs-on: ubuntu-latest
     needs: install_mariadb
     steps:
