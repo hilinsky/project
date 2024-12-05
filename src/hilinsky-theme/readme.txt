@@ -1,32 +1,42 @@
-=== Twenty Nineteen ===
+=== Twenty Twenty-Four ===
 Contributors: wordpressdotorg
-Tags: one-column, accessibility-ready, custom-colors, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, rtl-language-support, sticky-post, threaded-comments, translation-ready, block-patterns
-Requires at least: 4.7
+Requires at least: 6.4
 Tested up to: 6.7
-Requires PHP: 5.2.4
-Stable tag: 3.0
+Requires PHP: 7.0
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Our 2019 default theme is designed to show off the power of the block editor.
-
 == Description ==
-Our 2019 default theme is designed to show off the power of the block editor. It features custom styles for all the default blocks, and is built so that what you see in the editor looks like what you'll see on your website. Twenty Nineteen is designed to be adaptable to a wide range of websites, whether you’re running a photo blog, launching a new business, or supporting a non-profit. Featuring ample whitespace and modern sans-serif headlines paired with classic serif body text, it's built to be beautiful on all screen sizes.
 
-For more information about Twenty Nineteen please go to https://wordpress.org/documentation/article/twenty-nineteen/.
+Twenty Twenty-Four is designed to be flexible, versatile and applicable to any website. Its collection of templates and patterns tailor to different needs, such as presenting a business, blogging and writing or showcasing work. A multitude of possibilities open up with just a few adjustments to color and typography. Twenty Twenty-Four comes with style variations and full page designs to help speed up the site building process, is fully compatible with the site editor, and takes advantage of new design tools introduced in WordPress 6.4.
 
-== Installation ==
+== Changelog ==
 
-1. In your admin panel, go to Appearance -> Themes and click the 'Add New' button.
-2. Type in Twenty Nineteen in the search form and press the 'Enter' key on your keyboard.
-3. Click on the 'Activate' button to use your new theme right away.
-4. Go to https://wordpress.org/documentation/article/twenty-nineteen/ for a guide on how to customize this theme.
-5. Navigate to Appearance > Customize in your admin panel and customize to taste.
+= 1.3 =
+* Released: November 12, 2024
+
+https://wordpress.org/documentation/article/twenty-twenty-four-changelog/#Version_1.3
+
+= 1.2 =
+* Released: July 16, 2024
+
+https://wordpress.org/documentation/article/twenty-twenty-four-changelog/#Version_1.2
+
+= 1.1 =
+* Released: April 2, 2024
+
+https://wordpress.org/documentation/article/twenty-twenty-four-changelog/#Version_1.1
+
+= 1.0 =
+* Released: November 7, 2023
+
+https://wordpress.org/documentation/article/twenty-twenty-four-changelog/#Version_1.0
 
 == Copyright ==
 
-Twenty Nineteen WordPress Theme, Copyright 2018-2024 WordPress.org, and contributors.
-Twenty Nineteen is distributed under the terms of the GNU GPL
+Twenty Twenty-Four WordPress Theme, (C) 2023-2024 WordPress.org and contributors.
+Twenty Twenty-Four is distributed under the terms of the GNU GPL.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -38,118 +48,44 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
-== Changelog ==
 
-= 3.0 =
-* Released: November 12, 2024
+This theme bundles the following third-party resources:
 
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_3.0
+=== Fonts ===
 
-= 2.9 =
-* Released: July 16, 2024
+Cardo Font
+Copyright (c) 2002-2011, David J. Perry (hospes02@scholarsfonts.net)
+License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
+Source: http://scholarsfonts.net
 
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_2.9
+Instrument Sans Font
+Copyright 2022 The Instrument Sans Project Authors.
+License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
+Source: https://github.com/Instrument/instrument-sans
 
-= 2.8 =
-* Released: April 2, 2024
+Inter Font
+Copyright 2020 The Inter Project Authors.
+License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
+Source: https://github.com/rsms/inter
 
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_2.8
+Jost Font
+Copyright 2020 The Jost Project Authors.
+License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
+Source: https://github.com/indestructible-type/Jost
 
-= 2.7 =
-* Released: November 7, 2023
+=== Images ===
 
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_2.7
+License: CC0 https://creativecommons.org/publicdomain/zero/1.0/
 
-= 2.6 =
-* Released: August 8, 2023
+museum.webp - https://www.rawpixel.com/image/3297419/free-photo-image-interior-hallway-architecture
+tourist-and-building.webp - https://www.rawpixel.com/image/5928004/photo-image-public-domain-hand-person
+building-exterior.webp - https://www.rawpixel.com/image/430335/free-photo-image-architecture-building-roof
+windows.webp - https://www.rawpixel.com/image/3286615/free-photo-image-texture-architecture-building
+abstract-geometric-art.webp - https://www.rawpixel.com/image/3283970/free-photo-image-pattern-artwork-abstract
+angular-roof.webp - https://www.rawpixel.com/image/3289063/free-photo-image-architectural-detail-architecture
+art-gallery.webp - https://www.rawpixel.com/image/3286187/free-photo-image-person-stairs-architecture
+green-staircase.webp - https://www.rawpixel.com/image/430558/free-photo-image-abstract-architecture-art-public-domain
+hotel-facade.webp - https://www.rawpixel.com/image/3286725/free-photo-image-black-and-white-background-photos
 
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_2.6
-
-= 2.5 =
-* Released: March 28, 2023
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_2.5
-
-= 2.4 =
-* Released: November 1, 2022
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_2.4
-
-= 2.3 =
-* Released: May 24, 2022
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_2.3
-
-= 2.2 =
-* Released: January 25, 2022
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_2.2
-
-= 2.1 =
-* Released: July 20, 2021
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_2.1
-
-= 2.0 =
-* Released: March 9, 2021
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_2.0
-
-= 1.9 =
-* Released: December 22, 2020
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_1.9
-
-= 1.8 =
-* Released: December 8, 2020
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_1.8
-
-= 1.7 =
-* Released: August 11, 2020
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_1.7
-
-= 1.6 =
-* Released: June 10, 2020
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_1.6
-
-= 1.5 =
-* Released: March 31, 2020
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_1.5
-
-= 1.4 =
-* Released: May 7, 2019
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_1.4
-
-= 1.3 =
-* Released: February 21, 2019
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_1.3
-
-= 1.2 =
-* Released: January 9, 2019
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_1.2
-
-= 1.1 =
-* Released: December 19, 2018
-
-https://wordpress.org/documentation/article/twenty-nineteen-changelog/#Version_1.1
-
-= 1.0 =
-* Released: December 6, 2018
-
-Initial release
-
-== Resources ==
-* normalize.css, © 2012-2018 Nicolas Gallagher and Jonathan Neal, MIT
-* Underscores, © 2012-2024 Automattic, Inc., GNU GPL v2 or later
-* Bundled block pattern images:
-	* Abstract Background by HD Wallpapers, CC0. https://stocksnap.io/photo/abstract-background-0SRRVNMKBX
-	* Abstract Waves by HD Wallpapers, CC0. https://stocksnap.io/photo/abstract-waves-0KREGLTZQ3
-	* Abstract Bokeh by HD Wallpapers, CC0. https://stocksnap.io/photo/abstract-bokeh-P4KVZBMQ6L
-	* Colorful Bokeh by HD Wallpapers, CC0. https://stocksnap.io/photo/colorful-bokeh-VN4G84GL8H
+License: UNICODE LICENSE V3 https://www.unicode.org/license.txt
+icon-message.webp
