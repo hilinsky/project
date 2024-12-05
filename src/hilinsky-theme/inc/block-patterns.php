@@ -1,10 +1,13 @@
 <?php
 /**
- * Twenty Seventeen Theme: Block Patterns
+ * Block Patterns
+ *
+ * @link https://developer.wordpress.org/reference/functions/register_block_pattern/
+ * @link https://developer.wordpress.org/reference/functions/register_block_pattern_category/
  *
  * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since Twenty Seventeen 2.5
+ * @subpackage Twenty_Nineteen
+ * @since Twenty Nineteen 1.8
  */
 
 /**
@@ -13,8 +16,8 @@
 if ( function_exists( 'register_block_pattern_category' ) ) {
 
 	register_block_pattern_category(
-		'twentyseventeen',
-		array( 'label' => __( 'Twenty Seventeen', 'twentyseventeen' ) )
+		'twentynineteen',
+		array( 'label' => esc_html__( 'Twenty Nineteen', 'twentynineteen' ) )
 	);
 }
 
@@ -22,178 +25,177 @@ if ( function_exists( 'register_block_pattern_category' ) ) {
  * Register Block Patterns.
  */
 if ( function_exists( 'register_block_pattern' ) ) {
-	register_block_pattern(
-		'twentyseventeen/large-heading-with-button',
-		array(
-			'title'      => __( 'Large Heading with Button', 'twentyseventeen' ),
-			'categories' => array( 'twentyseventeen' ),
-			'content'    => '<!-- wp:heading {"level":1,"textColor":"black","style":{"typography":{"fontSize":50}}} -->
-            <h1 class="has-black-color has-text-color" style="font-size:50px">' . __( 'Attract Leads with Marketing Campaigns that Work', 'twentyseventeen' ) . '</h1>
-            <!-- /wp:heading -->
 
-            <!-- wp:buttons -->
-            <div class="wp-block-buttons"><!-- wp:button {"borderRadius":0,"className":"is-style-fill"} -->
-            <div class="wp-block-button is-style-fill"><a class="wp-block-button__link no-border-radius">' . __( 'Our Services', 'twentyseventeen' ) . '</a></div>
-            <!-- /wp:button --></div>
-            <!-- /wp:buttons -->',
+	// About.
+	register_block_pattern(
+		'twentynineteen/about',
+		array(
+			'title'      => esc_html__( 'About', 'twentynineteen' ),
+			'categories' => array( 'twentynineteen' ),
+			'content'    => implode(
+				'',
+				array(
+					'<!-- wp:paragraph {"fontSize":"huge","style":{"typography":{"lineHeight":"1.3"}}} -->',
+					'<p class="has-huge-font-size" style="line-height:1.3">' . esc_html__( 'Advocating for Businesses and Entrepreneurs since 2014', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph -->',
+					'<!-- wp:paragraph -->',
+					'<p>' . esc_html__( 'Eva Young Consulting was founded in 2014 to meet the needs of small businesses in the San Francisco Bay Area. We help startups define a clear brand identity and digital strategy that will carry them through their financing rounds and scale as their business grows. Discover how we can boost your brand with a unique and powerful digital marketing strategy.', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph -->',
+					'<!-- wp:buttons -->',
+					'<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"dark-gray"} -->',
+					'<div class="wp-block-button"><a class="wp-block-button__link has-dark-gray-background-color has-background">' . esc_html__( 'Learn More', 'twentynineteen' ) . '</a></div>',
+					'<!-- /wp:button --></div>',
+					'<!-- /wp:buttons -->',
+				)
+			),
 		)
 	);
 
+	// Get In Touch.
 	register_block_pattern(
-		'twentyseventeen/images-with-text-and-link',
+		'twentynineteen/get-in-touch',
 		array(
-			'title'      => __( 'Images with Text and Link', 'twentyseventeen' ),
-			'categories' => array( 'twentyseventeen' ),
-			'content'    => '<!-- wp:spacer -->
-            <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
-            <!-- /wp:spacer -->
-            <!-- wp:columns -->
-            <div class="wp-block-columns"><!-- wp:column -->
-            <div class="wp-block-column">
-			<!-- wp:image {"className":"size-large"} -->
-			<figure class="wp-block-image size-large"><img src="' . esc_url( get_template_directory_uri() ) . '/assets/images/stripes.jpg" alt="' . __( 'Black Stripes', 'twentyseventeen' ) . '"/></figure>
-			<!-- /wp:image -->
-            <!-- wp:heading {"textColor":"black","style":{"typography":{"fontSize":45}}} -->
-            <h2 class="has-black-color has-text-color" style="font-size:45px">' . __( 'Branding', 'twentyseventeen' ) . '</h2>
-            <!-- /wp:heading -->
-            <!-- wp:paragraph {"textColor":"black","style":{"typography":{"lineHeight":"1.8"}}} -->
-            <p class="has-black-color has-text-color" style="line-height:1.8">' . __( 'Communicate your purpose and goals with a beautiful logo that encapsulates your business.', 'twentyseventeen' ) . '</p>
-            <!-- /wp:paragraph -->
-            <!-- wp:paragraph {"style":{"typography":{"lineHeight":"3"}}} -->
-            <p style="line-height:3"><a href="#"><strong>' . __( 'See Case Study', 'twentyseventeen' ) . ' →</strong></a></p>
-            <!-- /wp:paragraph --></div>
-            <!-- /wp:column -->
-            <!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:spacer {"height":254} -->
-            <div style="height:254px" aria-hidden="true" class="wp-block-spacer"></div>
-            <!-- /wp:spacer -->
-			<!-- wp:image {"className":"size-large"} -->
-			<figure class="wp-block-image size-large"><img src="' . esc_url( get_template_directory_uri() ) . '/assets/images/white-border.jpg" alt="' . __( 'White border', 'twentyseventeen' ) . '"/></figure>
-			<!-- /wp:image -->
-            <!-- wp:heading {"textColor":"black","style":{"typography":{"fontSize":45}}} -->
-            <h2 class="has-black-color has-text-color" style="font-size:45px">' . __( 'Web Design', 'twentyseventeen' ) . '</h2>
-            <!-- /wp:heading -->
-            <!-- wp:paragraph {"textColor":"black","style":{"typography":{"lineHeight":"1.8"}}} -->
-            <p class="has-black-color has-text-color" style="line-height:1.8">' . __( 'Need a website? We&#39;ve got you covered. Our design team will create a stunning design to transform your brand.', 'twentyseventeen' ) . '</p>
-            <!-- /wp:paragraph -->
-            <!-- wp:paragraph {"style":{"typography":{"lineHeight":"3.0"}}} -->
-            <p style="line-height:3.0"><a href="#"><strong>' . __( 'See Case Study', 'twentyseventeen' ) . ' →</strong></a></p>
-            <!-- /wp:paragraph --></div>
-            <!-- /wp:column --></div>
-            <!-- /wp:columns -->',
+			'title'      => esc_html__( 'Get In Touch', 'twentynineteen' ),
+			'categories' => array( 'twentynineteen' ),
+			'content'    => implode(
+				'',
+				array(
+					'<!-- wp:paragraph {"fontSize":"huge"} -->',
+					'<p class="has-huge-font-size">' . esc_html__( 'Get In Touch', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph -->',
+					'<!-- wp:columns -->',
+					'<div class="wp-block-columns"><!-- wp:column -->',
+					'<div class="wp-block-column"><!-- wp:paragraph -->',
+					'<p>' . esc_html__( '20 Cooper Avenue', 'twentynineteen' ) . '<br>' . esc_html__( 'New York, New York 10023', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph --></div>',
+					'<!-- /wp:column -->',
+					'<!-- wp:column -->',
+					'<div class="wp-block-column"><!-- wp:paragraph -->',
+					'<p>' . esc_html__( '(555) 555-5555', 'twentynineteen' ) . '<br><a href="mailto:example@example.com">' . esc_html__( 'example@example.com', 'twentynineteen' ) . '</a></p>',
+					'<!-- /wp:paragraph --></div>',
+					'<!-- /wp:column --></div>',
+					'<!-- /wp:columns -->',
+					'<!-- wp:buttons -->',
+					'<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"dark-gray"} -->',
+					'<div class="wp-block-button"><a class="wp-block-button__link has-dark-gray-background-color has-background">' . esc_html__( 'Contact Us', 'twentynineteen' ) . '</a></div>',
+					'<!-- /wp:button --></div>',
+					'<!-- /wp:buttons -->',
+				)
+			),
 		)
 	);
 
+	// Services.
 	register_block_pattern(
-		'twentyseventeen/images-with-link',
+		'twentynineteen/services',
 		array(
-			'title'      => __( 'Images with Link', 'twentyseventeen' ),
-			'categories' => array( 'twentyseventeen' ),
-			'content'    => '<!-- wp:spacer -->
-            <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
-            <!-- /wp:spacer -->
-            <!-- wp:columns {"verticalAlignment":"top"} -->
-            <div class="wp-block-columns are-vertically-aligned-top"><!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:group -->
-            <div class="wp-block-group"><div class="wp-block-group__inner-container">
-			<!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default"} -->
-			<div class="wp-block-image is-style-default"><figure class="aligncenter size-large"><img src="' . esc_url( get_template_directory_uri() ) . '/assets/images/stripes.jpg" alt="' . __( 'Black Stripes', 'twentyseventeen' ) . '"/></figure></div>
-			<!-- /wp:image -->
-            <!-- wp:heading {"align":"left","textColor":"black","style":{"typography":{"fontSize":30}}} -->
-            <h2 class="has-text-align-left has-black-color has-text-color" style="font-size:30px">' . __( 'Branding', 'twentyseventeen' ) . '</h2>
-            <!-- /wp:heading -->
-            <!-- wp:paragraph {"align":"left"} -->
-            <p class="has-text-align-left"><a href="#">' . __( 'See Case Study', 'twentyseventeen' ) . ' →</a></p>
-            <!-- /wp:paragraph --></div></div>
-            <!-- /wp:group --></div>
-            <!-- /wp:column -->
-            <!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:group -->
-            <div class="wp-block-group"><div class="wp-block-group__inner-container">
-			<!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default"} -->
-			<div class="wp-block-image is-style-default"><figure class="aligncenter size-large"><img src="' . esc_url( get_template_directory_uri() ) . '/assets/images/white-border.jpg" alt="' . __( 'White border', 'twentyseventeen' ) . '"/></figure></div>
-			<!-- /wp:image -->
-            <!-- wp:heading {"align":"left","textColor":"black","style":{"typography":{"fontSize":30}}} -->
-            <h2 class="has-text-align-left has-black-color has-text-color" style="font-size:30px">' . __( 'Design', 'twentyseventeen' ) . '</h2>
-            <!-- /wp:heading -->
-            <!-- wp:paragraph {"align":"left"} -->
-            <p class="has-text-align-left"><a href="#">' . __( 'See Case Study', 'twentyseventeen' ) . ' →</a></p>
-            <!-- /wp:paragraph --></div></div>
-            <!-- /wp:group --></div>
-            <!-- /wp:column -->
-            <!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:group -->
-            <div class="wp-block-group"><div class="wp-block-group__inner-container">
-			<!-- wp:image {"align":"center","sizeSlug":"large","className":"is-style-default"} -->
-			<div class="wp-block-image is-style-default"><figure class="aligncenter size-large"><img src="' . esc_url( get_template_directory_uri() ) . '/assets/images/direct-light.jpg" alt="' . __( 'Direct Light', 'twentyseventeen' ) . '"/></figure></div>
-			<!-- /wp:image -->
-            <!-- wp:heading {"align":"left","textColor":"black","style":{"typography":{"fontSize":30}}} -->
-            <h2 class="has-text-align-left has-black-color has-text-color" style="font-size:30px">' . __( 'Strategy', 'twentyseventeen' ) . '</h2>
-            <!-- /wp:heading -->
-            <!-- wp:paragraph {"align":"left"} -->
-            <p class="has-text-align-left"><a href="#">' . __( 'See Case Study', 'twentyseventeen' ) . ' →</a></p>
-            <!-- /wp:paragraph --></div></div>
-            <!-- /wp:group --></div>
-            <!-- /wp:column --></div>
-            <!-- /wp:columns -->
-            <!-- wp:spacer -->
-            <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
-            <!-- /wp:spacer -->',
+			'title'      => esc_html__( 'Services', 'twentynineteen' ),
+			'categories' => array( 'twentynineteen' ),
+			'content'    => implode(
+				'',
+				array(
+					'<!-- wp:heading -->',
+					'<h2>' . esc_html__( 'Services', 'twentynineteen' ) . '</h2>',
+					'<!-- /wp:heading -->',
+					'<!-- wp:columns {"className":"has-2-columns"} -->',
+					'<div class="wp-block-columns has-2-columns"><!-- wp:column -->',
+					'<div class="wp-block-column"><!-- wp:media-text {"mediaLink":"' . esc_url( get_template_directory_uri() ) . '/images/pattern_01.jpg","mediaType":"image","mediaWidth":10,"isStackedOnMobile":false} -->',
+					'<div class="wp-block-media-text alignwide" style="grid-template-columns:10% auto"><figure class="wp-block-media-text__media"><img src="' . esc_url( get_template_directory_uri() ) . '/images/pattern_01.jpg" alt="' . esc_html__( 'Gradient', 'twentynineteen' ) . '"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph -->',
+					'<p>' . esc_html__( 'Website Design', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph --></div></div>',
+					'<!-- /wp:media-text -->',
+					'<!-- wp:media-text {"mediaLink":"' . esc_url( get_template_directory_uri() ) . '/images/pattern_02.jpg","mediaType":"image","mediaWidth":10,"isStackedOnMobile":false} -->',
+					'<div class="wp-block-media-text alignwide" style="grid-template-columns:10% auto"><figure class="wp-block-media-text__media"><img src="' . esc_url( get_template_directory_uri() ) . '/images/pattern_02.jpg" alt="' . esc_html__( 'Gradient', 'twentynineteen' ) . '"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph -->',
+					'<p>' . esc_html__( 'Mobile', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph --></div></div>',
+					'<!-- /wp:media-text -->',
+					'<!-- wp:media-text {"mediaLink":"' . esc_url( get_template_directory_uri() ) . '/images/pattern_03.jpg","mediaType":"image","mediaWidth":10,"isStackedOnMobile":false} -->',
+					'<div class="wp-block-media-text alignwide" style="grid-template-columns:10% auto"><figure class="wp-block-media-text__media"><img src="' . esc_url( get_template_directory_uri() ) . '/images/pattern_03.jpg" alt="' . esc_html__( 'Gradient', 'twentynineteen' ) . '"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph -->',
+					'<p>' . esc_html__( 'Social Media', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph --></div></div>',
+					'<!-- /wp:media-text --></div>',
+					'<!-- /wp:column -->',
+					'<!-- wp:column -->',
+					'<div class="wp-block-column"><!-- wp:media-text {"mediaLink":"' . esc_url( get_template_directory_uri() ) . '/images/pattern_03.jpg","mediaType":"image","mediaWidth":10,"isStackedOnMobile":false} -->',
+					'<div class="wp-block-media-text alignwide" style="grid-template-columns:10% auto"><figure class="wp-block-media-text__media"><img src="' . esc_url( get_template_directory_uri() ) . '/images/pattern_03.jpg" alt="' . esc_html__( 'Gradient', 'twentynineteen' ) . '"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph -->',
+					'<p>' . esc_html__( 'Marketing', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph --></div></div>',
+					'<!-- /wp:media-text -->',
+					'<!-- wp:media-text {"mediaLink":"' . esc_url( get_template_directory_uri() ) . '/images/pattern_04.jpg","mediaType":"image","mediaWidth":10,"isStackedOnMobile":false} -->',
+					'<div class="wp-block-media-text alignwide" style="grid-template-columns:10% auto"><figure class="wp-block-media-text__media"><img src="' . esc_url( get_template_directory_uri() ) . '/images/pattern_04.jpg" alt="' . esc_html__( 'Gradient', 'twentynineteen' ) . '"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph -->',
+					'<p>' . esc_html__( 'Copywriting', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph --></div></div>',
+					'<!-- /wp:media-text -->',
+					'<!-- wp:media-text {"mediaLink":"' . esc_url( get_template_directory_uri() ) . '/images/pattern_01.jpg","mediaType":"image","mediaWidth":10,"isStackedOnMobile":false} -->',
+					'<div class="wp-block-media-text alignwide" style="grid-template-columns:10% auto"><figure class="wp-block-media-text__media"><img src="' . esc_url( get_template_directory_uri() ) . '/images/pattern_01.jpg" alt="' . esc_html__( 'Gradient', 'twentynineteen' ) . '"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph -->',
+					'<p>' . esc_html__( 'Content Strategy', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph --></div></div>',
+					'<!-- /wp:media-text --></div>',
+					'<!-- /wp:column --></div>',
+					'<!-- /wp:columns -->',
+				)
+			),
 		)
 	);
 
+	// Team.
 	register_block_pattern(
-		'twentyseventeen/services',
+		'twentynineteen/team',
 		array(
-			'title'      => __( 'Services', 'twentyseventeen' ),
-			'categories' => array( 'twentyseventeen' ),
-			'content'    => '<!-- wp:spacer -->
-            <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
-            <!-- /wp:spacer -->
-            
-            <!-- wp:heading {"level":1,"style":{"typography":{"fontSize":50}}} -->
-            <h1 style="font-size:50px">' . __( 'Our Services', 'twentyseventeen' ) . '</h1>
-            <!-- /wp:heading -->
-            
-            <!-- wp:columns -->
-            <div class="wp-block-columns"><!-- wp:column -->
-            <div class="wp-block-column">
-            <!-- wp:paragraph {"style":{"typography":{"fontSize":21, "lineHeight":"2.5"}}} -->
-            <p style="font-size:21px"><a href="#">' . __( 'Branding', 'twentyseventeen' ) . ' →</a><br><a href="#">' . __( 'Web Design', 'twentyseventeen' ) . ' →</a><br><a href="#">' . __( 'Web Development', 'twentyseventeen' ) . ' →</a></p>
-            <!-- /wp:paragraph -->
-            </div>
-            <!-- /wp:column -->
-            
-            <!-- wp:column -->
-            <div class="wp-block-column">
-            <!-- wp:paragraph {"style":{"typography":{"fontSize":21, "lineHeight":"2.5"}}} -->
-            <p style="font-size:21px"><a href="#">' . __( 'Content Strategy', 'twentyseventeen' ) . ' →</a><br><a href="#">' . __( 'Marketing &amp; SEO', 'twentyseventeen' ) . ' →</a><br><a href="#">' . __( 'Video Production', 'twentyseventeen' ) . ' →</a></p>
-            <!-- /wp:paragraph --></div>
-            <!-- /wp:column --></div>
-            <!-- /wp:columns -->
-            
-            <!-- wp:spacer -->
-            <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
-            <!-- /wp:spacer -->',
+			'title'         => esc_html__( 'Team', 'twentynineteen' ),
+			'categories'    => array( 'twentynineteen' ),
+			'viewportWidth' => 1400,
+			'content'       => implode(
+				'',
+				array(
+					'<!-- wp:heading -->',
+					'<h2>' . esc_html__( 'Team', 'twentynineteen' ) . '</h2>',
+					'<!-- /wp:heading -->',
+					'<!-- wp:media-text {"mediaType":"image","mediaWidth":28,"imageFill":true} -->',
+					'<div class="wp-block-media-text alignwide is-stacked-on-mobile is-image-fill" style="grid-template-columns:28% auto"><figure class="wp-block-media-text__media" style="background-image:url(' . esc_url( get_template_directory_uri() ) . '/images/pattern_01.jpg);background-position:50% 50%"><img src="' . esc_url( get_template_directory_uri() ) . '/images/pattern_01.jpg" alt="' . esc_html__( 'Gradient', 'twentynineteen' ) . '"/></figure><div class="wp-block-media-text__content"><!-- wp:heading {"level":3} -->',
+					'<h3>' . esc_html__( 'Eva Young', 'twentynineteen' ) . '</h3>',
+					'<!-- /wp:heading -->',
+					'<!-- wp:paragraph -->',
+					'<p>' . esc_html__( 'Eva Young grew up working alongside her parents at their restaurant in Queens, NY. She opened Eva Young Consulting in 2014 to help small businesses like her parents’ restaurant adapt to the digital age.', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph --></div></div>',
+					'<!-- /wp:media-text -->',
+					'<!-- wp:media-text {"mediaType":"image","mediaWidth":28,"imageFill":true} -->',
+					'<div class="wp-block-media-text alignwide is-stacked-on-mobile is-image-fill" style="grid-template-columns:28% auto"><figure class="wp-block-media-text__media" style="background-image:url(' . esc_url( get_template_directory_uri() ) . '/images/pattern_02.jpg);background-position:50% 50%"><img src="' . esc_url( get_template_directory_uri() ) . '/images/pattern_02.jpg" alt="' . esc_html__( 'Gradient', 'twentynineteen' ) . '"/></figure><div class="wp-block-media-text__content"><!-- wp:heading {"level":3} -->',
+					'<h3>' . esc_html__( 'Doug Watson', 'twentynineteen' ) . '</h3>',
+					'<!-- /wp:heading -->',
+					'<!-- wp:paragraph -->',
+					'<p>' . esc_html__( 'Oddly enough, Doug Watson also grew up working alongside his parents at a family-owned restaurant in Queens, NY. He &nbsp;worked on digital campaigns for Fortune 500 Companies before joining Eva Green Consulting.', 'twentynineteen' ) . '</p>',
+					'<!-- /wp:paragraph --></div></div>',
+					'<!-- /wp:media-text -->',
+				)
+			),
 		)
 	);
 
+	// What We Do.
 	register_block_pattern(
-		'twentyseventeen/contact-us',
+		'twentynineteen/what-we-do',
 		array(
-			'title'      => __( 'Contact Us', 'twentyseventeen' ),
-			'categories' => array( 'twentyseventeen' ),
-			'content'    => '<!-- wp:cover {"customOverlayColor":"#93aab8","minHeight":700,"align":"center"} -->
-            <div class="wp-block-cover aligncenter has-background-dim" style="background-color:#93aab8;min-height:700px"><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"left","textColor":"white","style":{"typography":{"fontSize":50}}} -->
-            <p class="has-text-align-left has-white-color has-text-color" style="font-size:50px">' . __( 'We are proud to serve outstanding clients.', 'twentyseventeen' ) . '</p>
-            <!-- /wp:paragraph -->
-            
-            <!-- wp:buttons -->
-            <div class="wp-block-buttons"><!-- wp:button {"borderRadius":0,"backgroundColor":"black","textColor":"white","className":"is-style-fill"} -->
-            <div class="wp-block-button is-style-fill"><a class="wp-block-button__link has-white-color has-black-background-color has-text-color has-background no-border-radius">' . __( 'Contact us', 'twentyseventeen' ) . '</a></div>
-            <!-- /wp:button --></div>
-            <!-- /wp:buttons --></div></div>
-            <!-- /wp:cover -->',
+			'title'         => esc_html__( 'What We Do', 'twentynineteen' ),
+			'categories'    => array( 'twentynineteen' ),
+			'viewportWidth' => 1400,
+			'content'       => implode(
+				'',
+				array(
+					'<!-- wp:heading -->',
+					'<h2>' . esc_html__( 'What We Do', 'twentynineteen' ) . '</h2>',
+					'<!-- /wp:heading -->',
+					'<!-- wp:pullquote {"align":"wide","className":"is-style-solid-color"} -->',
+					'<figure class="wp-block-pullquote alignwide is-style-solid-color"><blockquote><p>' . esc_html__( 'Redefine brands', 'twentynineteen' ) . '</p><cite>' . esc_html__( 'We help startups define (or refine) a clear brand identity.', 'twentynineteen' ) . '</cite></blockquote></figure>',
+					'<!-- /wp:pullquote -->',
+					'<!-- wp:pullquote {"mainColor":"dark-gray","customTextColor":"#ffffff","align":"wide","className":"is-style-solid-color"} -->',
+					'<figure class="wp-block-pullquote alignwide has-background has-dark-gray-background-color is-style-solid-color"><blockquote class="has-text-color" style="color:#ffffff"><p>' . esc_html__( 'Activate new customers', 'twentynineteen' ) . '</p><cite>' . esc_html__( 'We help businesses grow.', 'twentynineteen' ) . '</cite></blockquote></figure>',
+					'<!-- /wp:pullquote -->',
+					'<!-- wp:pullquote {"customMainColor":"#f7f7f7","customTextColor":"#111111","align":"wide","className":"is-style-solid-color"} -->',
+					'<figure class="wp-block-pullquote alignwide has-background is-style-solid-color" style="background-color:#f7f7f7"><blockquote class="has-text-color" style="color:#111111"><p>' . esc_html__( 'Spark interest on social media', 'twentynineteen' ) . '</p><cite>' . esc_html__( 'We help companies communicate with their customers.', 'twentynineteen' ) . '</cite></blockquote></figure>',
+					'<!-- /wp:pullquote -->',
+				)
+			),
 		)
 	);
 }
