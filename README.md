@@ -1,3 +1,3 @@
 # App repository
 
-This repository contains code of theme WordPress
+This repository contains code of theme WordPress.
